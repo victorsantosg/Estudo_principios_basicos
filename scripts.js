@@ -9,15 +9,26 @@ let active = 0
 let firstPosition = 0
 let lastPosition = itens.length - 1
 
-
-nextButton.onclick = () => {
+function setSlider() {
     let itemOld = container.querySelector('.list .item.active')
     itemOld.classList.remove('active')
 
+    let dotsOld = indicator.querySelector('ul li.active')
+    dotsOld.classList.remove('active')
+    dots[active].classList.add('active')
+
+    indicator.querySelector('.number').innerHTML = '0' + (active + 1)
+}
+
+nextButton.onclick = () => {
     active = active + 1 > lastPosition ? 0 : active + 1
+    setSlider()
     itens[active].classList.add('active')
 }
 
 prevButton.onclick = () => {
-    console.log("Botão prev")
+    active = active - 1 < firstPosition ? lastPosition : active - 1 
+    setSlider()
+    itens[active].classList.add('active')
+    
 }
